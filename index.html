@@ -131,13 +131,13 @@
 		<h3>Transitioning Registered Custom Properties with discretely animatable syntaxes cause a transition loop</h3>
 		<dl>
 			<dt>Demo</dt>
-			<dd><a href="safari/registered-discrete-loop/">safari/registered-discrete-loop/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are registered with <code>@property</code>. The former as a <code>&lt;number&gt;</code> and the latter as a <code>&lt;custom-ident&gt;</code></dd>
+			<dd><a href="safari/registered-discrete-loop/">safari/registered-discrete-loop/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are registered with <code>@property</code>. The former as a <code>&lt;number&gt;</code> and the latter as a <code>*</code></dd>
 			<dt>Expected behavior</dt>
 			<dd>When clicking the <code>--variable2</code> button, the output should change and the transition should have triggered only once.</dd>
 			<dt>Actual Behavior</dt>
 			<dd>While the output does change, the transition is repeatedly triggered. You can verify this by checking the console, which logs <code>"_handleUpdate"</code> on <code>transitionstart</code>. This does not happen when clicking the <code>--variable1</code> button.</dd>
 			<dt>Noteworthy</dt>
-			<dd>When changing <code>--variable2</code> to a syntax of <code>&lt;string&gt;</code> it also doesn’t work, which leads me to believe that this behavior shows for all syntaxes that cannot be interpolated.</dd>
+			<dd>When changing <code>--variable2</code> to a syntax of <code>&lt;string&gt;</code> it also doesn’t work but changing it to <code>&lt;custom-ident&gt;</code> (and changing the <code>initial-value</code>) does work.</dd>
 			<dt>Bug Report</dt>
 			<dd><a href="https://bugs.webkit.org/show_bug.cgi?id=279013">https://bugs.webkit.org/show_bug.cgi?id=279013</a></dd>
 		</dl>
