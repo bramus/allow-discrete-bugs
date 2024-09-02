@@ -95,7 +95,7 @@
 			<dt>Noteworthy</dt>
 			<dd>N/A</dd>
 			<dt>Bug Report</dt>
-			<dd>TODO</dd>
+			<dd><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1916200">https://bugzilla.mozilla.org/show_bug.cgi?id=1916200</a></dd>
 		</dl>
 
 		<h3>Custom Properties with discretely animatable syntaxes / Unregistered Custom Properties don’t trigger <code>transitionstart</code> upon the first change</h3>
@@ -109,7 +109,7 @@
 			<dt>Noteworthy</dt>
 			<dd>This applies to both Unregistered Custom Properties a Registered Custom Properties that have a syntax that can only be animated discretely.</dd>
 			<dt>Bug Report</dt>
-			<dd>TODO</dd>
+			<dd><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1916202">https://bugzilla.mozilla.org/show_bug.cgi?id=1916202</a></dd>
 		</dl>
 
 		<h3>Registered Custom Properties rarely trigger a <code>transitionstart</code></h3>
@@ -123,7 +123,7 @@
 			<dt>Noteworthy</dt>
 			<dd>Triggering the <code>--variable2</code> button <em>(after a first miss, see previous bug)</em> does always update trigger a <code>transitionstart</code>. Is this bug only related to syntaxes that can be interpolated?</dd>
 			<dt>Bug Report</dt>
-			<dd>TODO</dd>
+			<dd><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1916203">https://bugzilla.mozilla.org/show_bug.cgi?id=1916203</a></dd>
 		</dl>
 	
 		<h2><a href="#safari" name="safari">#</a> Safari Bugs</h2>
@@ -135,11 +135,11 @@
 			<dt>Expected behavior</dt>
 			<dd>When clicking the <code>--variable1</code> or <code>--variable2</code> buttons, the output should change and the transition should have triggered only once.</dd>
 			<dt>Actual Behavior</dt>
-			<dd>While the output does change, the transition is repeatedly triggered. You can verify this by checking the console, which logs <code>_handleUpdate</code> on <code>transitionstart</code></dd>
+			<dd>While the output does change, the transition is repeatedly triggered. You can verify this by checking the console, which logs <code>"_handleUpdate"</code> on <code>transitionstart</code></dd>
 			<dt>Noteworthy</dt>
 			<dd></dd>
 			<dt>Bug Report</dt>
-			<dd>TODO</dd>
+			<dd><a href="https://bugs.webkit.org/show_bug.cgi?id=279012">https://bugs.webkit.org/show_bug.cgi?id=279012</a></dd>
 		</dl>
 
 		<h3>Transitioning Registered Custom Properties with discretely animatable syntaxes cause a transition loop</h3>
@@ -149,11 +149,11 @@
 			<dt>Expected behavior</dt>
 			<dd>When clicking the <code>--variable2</code> button, the output should change and the transition should have triggered only once.</dd>
 			<dt>Actual Behavior</dt>
-			<dd>While the output does change, the transition is repeatedly triggered. You can verify this by checking the console, which logs <code>_handleUpdate</code> on <code>transitionstart</code>. This does not happen when clicking the <code>--variable1</code> button.</dd>
+			<dd>While the output does change, the transition is repeatedly triggered. You can verify this by checking the console, which logs <code>"_handleUpdate"</code> on <code>transitionstart</code>. This does not happen when clicking the <code>--variable1</code> button.</dd>
 			<dt>Noteworthy</dt>
 			<dd>When changing <code>--variable2</code> to a syntax of <code>&lt;string&gt;</code> it also doesn’t work, which leads me to believe that this behavior shows for all syntaxes that cannot be interpolated.</dd>
 			<dt>Bug Report</dt>
-			<dd>TODO</dd>
+			<dd><a href="https://bugs.webkit.org/show_bug.cgi?id=279013">https://bugs.webkit.org/show_bug.cgi?id=279013</a></dd>
 		</dl>
 	</main>
 	<footer>
