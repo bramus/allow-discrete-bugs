@@ -67,20 +67,6 @@
 			<dt>Bug Report</dt>
 			<dd><a href="https://crbug.com/360159391">https://crbug.com/360159391</a></dd>
 		</dl>
-
-		<h3>Registered Custom Properties using discretely animatable syntaxes don’t trigger <code>transitionstart</code></h3>
-		<dl>
-			<dt>Demo</dt>
-			<dd><a href="chrome/registered-discrete-no-transition/">chrome/registered-discrete-no-transition/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are registered with <code>@property</code>. The former as a <code>&lt;number&gt;</code> and the latter as a <code>&lt;custom-ident&gt;</code></dd>
-			<dt>Expected behavior</dt>
-			<dd>When clicking the <code>--variable2</code> button, the output should change.</dd>
-			<dt>Actual Behavior</dt>
-			<dd>Nothing happens because no transition gets triggered.</dd>
-			<dt>Noteworthy</dt>
-			<dd>The transition triggers fine for <code>--variable1</code> which is a <code>&lt;number&gt;</code>. When changing <code>--variable2</code> to a syntax of <code>&lt;string&gt;</code> it also doesn’t work, which leads me to believe that this behavior shows for all syntaxes that cannot be interpolated.</dd>
-			<dt>Bug Report</dt>
-			<dd>TODO</dd>
-		</dl>
 	
 		<h2><a href="#firefox" name="firefox">#</a> Firefox Bugs</h2>
 		<p>Tested in Firefox Nightly 131.0a1 (2024-09-01) (aarch64)</p>
