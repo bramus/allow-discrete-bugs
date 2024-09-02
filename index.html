@@ -87,15 +87,15 @@
 		<h3>When first setting the value of a unregistered custom property, no <code>transitionstart</code> is triggered</h3>
 		<dl>
 			<dt>Demo</dt>
-			<dd><a href="firefox/unregistered-no-transition/">firefox/unregistered-no-transition/</a> – the custom properties <code>--variable1</code> is registered with <code>@property</code> as a <code>&lt;number&gt;</code></dd>
+			<dd><a href="firefox/unregistered-no-transition/">firefox/unregistered-no-transition/</a> – the custom property <code>--variable2</code> is not registered with <code>@property</code> and is currently not part of any declaration.</dd>
 			<dt>Expected behavior</dt>
 			<dd>Clicking the <code>--variable2</code> button updates the output</dd>
 			<dt>Actual Behavior</dt>
 			<dd>The first click does nothing. All successive clicks do trigger the transition.</dd>
 			<dt>Noteworthy</dt>
-			<dd>Not sure if it is specced what should happen here. As an author, I’d like to get notified though.</dd>
+			<dd>Not sure if it is specced what should happen here. As an author, I’d like to get notified of this change though.</dd>
 			<dt>Bug Report</dt>
-			<dd><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1916202">https://bugzilla.mozilla.org/show_bug.cgi?id=1916202</a></dd>
+			<dd><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1916214">https://bugzilla.mozilla.org/show_bug.cgi?id=1916214</a></dd>
 		</dl>
 
 		<h3>Registered Custom Properties with syntaxes that can be interpolated rarely trigger a <code>transitionstart</code></h3>
