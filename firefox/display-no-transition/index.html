@@ -45,7 +45,7 @@
       borderIsToggled = !borderIsToggled;
     }
     window.randomValue = (variable) => document.documentElement.style.setProperty(variable, Math.random());
-    window.randomString = (variable) => document.documentElement.style.setProperty(variable, window.crypto.randomUUID());
+    window.randomString = (variable) => document.documentElement.style.setProperty(variable, `random-${window.crypto.randomUUID()}`);
     window.toggleBodyClass = (className) => document.body.classList.toggle(className);
     window.detachObserver = () => { cssStyleObserver.detach(); document.querySelector('#result').textContent = ''; };
     window.attachObserver = () => cssStyleObserver.attach(document.body);
