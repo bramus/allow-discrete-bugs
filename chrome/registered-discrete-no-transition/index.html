@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @property --variable1 {
+      syntax: "<number>";
+      inherits: true;
+      initial-value: 0;
+    }
+    @property --variable2 {
+      syntax: "<custom-ident>";
+      inherits: true;
+      initial-value: "";
+    }
+
+    :root {
+      --variable1: 0.5;
+    }
+
+    body {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+<button onclick="randomValue('--variable1')"><code>--variable1: &lt;random number&gt;</code></button>
+<button onclick="randomString('--variable2')"><code>--variable2: &lt;random string&gt;</code></button>
+<button onclick="toggleDisplay()">Toggle <code>display</code></button>
+<button onclick="toggleBorder()">Toggle <code>border-width</code></button>
+
+<pre id="result"></pre>
+
+<script type="module">
+    import CSSStyleObserver from './style-observer.esm.js';
+
+    const cssStyleObserver = new CSSStyleObserver(['--variable1', '--variable2', 'display', 'border-width'],
+        (variables) => {
+            document.querySelector('#result').textContent = Object.entries(variables).map(value => `${value[0]} = ${value[1]}`).join('\n');
+        });
+    cssStyleObserver.attach(document.body);
+
+    window.toggleDisplay = () => {
+      if (getComputedStyle(document.body).getPropertyValue('display') == 'block') {
+        document.body.style.setProperty('display', 'inline-block');
+      } else {
+        document.body.style.setProperty('display', 'block');
+      }
+    }
+    let borderIsToggled = false;
+    window.toggleBorder = () => {
+      if (borderIsToggled === false) {
+        document.body.style.setProperty('border-width', '10px');
+      } else {
+        document.body.style.setProperty('border-width', '1px');
+      }
+      borderIsToggled = !borderIsToggled;
+    }
+    window.randomValue = (variable) => document.documentElement.style.setProperty(variable, Math.random());
+    window.randomString = (variable) => document.documentElement.style.setProperty(variable, window.crypto.randomUUID());
+    window.toggleBodyClass = (className) => document.body.classList.toggle(className);
+    window.detachObserver = () => { cssStyleObserver.detach(); document.querySelector('#result').textContent = ''; };
+    window.attachObserver = () => cssStyleObserver.attach(document.body);
+</script>
+</body>
+</html>

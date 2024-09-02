@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Discrete Transition Bug Reports</title>
+	<style>
+		dl {
+			display: grid;
+			grid-template: auto / 10em 1fr;
+		}
+
+		dt {
+			grid-column: 1;
+		}
+
+		dd {
+			grid-column: 2;
+		}
+
+		dt, dd {
+			margin: 0;
+			padding: .3em .5em;
+			border-top: 1px solid rgba(0,0,0,.1);
+		}
+
+		h2 {
+			margin-top: 5em;
+		}
+
+		h3 {
+			margin-top: 2em;
+		}
+
+		main, footer {
+			width: 95vw;
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		footer {
+			margin: 5em auto 3em;
+			text-align: center;
+			font-style: italic;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<h1>This page contains a bunch of bug reports related to <code>transition-behavior: allow-discrete</code></h1>
+
+		<p>All demos use <a href="https://github.com/bramus/style-observer"><code>@bramus/style-observer</code></a> which set up a <code>transitionstart</code> listener on a bunch of properties that are being tracked. See <a href="https://brm.us/style-observer">https://brm.us/style-observer</a> for details on how this library works.</p>
+		<p>In all of the demos it is expected that clicking any button updates the output shown underneath the button row.</p>
+		
+		<h2><a href="#chrome" name="chrome">#</a> Chrome Bugs</h2>
+		<p>Tested in Chrome 130.0.6692.0 (Official Build) canary (arm64) </p>
+		<h3>Unregistered Custom Properties don’t trigger a <code>transitionstart</code></h3>
+		<dl>
+			<dt>Demo</dt>
+			<dd><a href="chrome/unregistered-no-transition/">chrome/unregistered-no-transition/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are not registered.</dd>
+			<dt>Expected behavior</dt>
+			<dd>When clicking the <code>--variable1</code> or <code>--variable2</code> buttons, the output should change.</dd>
+			<dt>Actual Behavior</dt>
+			<dd>Nothing happens because no transitions get triggered.</dd>
+			<dt>Noteworthy</dt>
+			<dd>You can work around this by registering the custom properties using <code>@property</code>, but that only works in some cases <em>(see next bug)</em>.</dd>
+			<dt>Bug Report</dt>
+			<dd><a href="https://crbug.com/360159391">https://crbug.com/360159391</a></dd>
+		</dl>
+
+		<h3>Registered Custom Properties using discretely animatable syntaxes don’t trigger <code>transitionstart</code></h3>
+		<dl>
+			<dt>Demo</dt>
+			<dd><a href="chrome/registered-discrete-no-transition/">chrome/registered-discrete-no-transition/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are registered with <code>@property</code>. The former as a <code>&lt;number&gt;</code> and the latter as a <code>&lt;custom-ident&gt;</code></dd>
+			<dt>Expected behavior</dt>
+			<dd>When clicking the <code>--variable2</code> button, the output should change.</dd>
+			<dt>Actual Behavior</dt>
+			<dd>Nothing happens because no transition gets triggered.</dd>
+			<dt>Noteworthy</dt>
+			<dd>The transition triggers fine for <code>--variable1</code> which is a <code>&lt;number&gt;</code>. When changing <code>--variable2</code> to a syntax of <code>&lt;string&gt;</code> it also doesn’t work, which leads me to believe that this behavior shows for all syntaxes that cannot be interpolated.</dd>
+			<dt>Bug Report</dt>
+			<dd>TODO</dd>
+		</dl>
+	
+		<h2><a href="#firefox" name="firefox">#</a> Firefox Bugs</h2>
+		<p>Tested in Firefox Nightly 131.0a1 (2024-09-01) (aarch64)</p>
+		<h3>Transitioning <code>display</code> does not trigger a <code>transitionstart</code></h3>
+		<dl>
+			<dt>Demo</dt>
+			<dd><a href="firefox/display-no-transition/">firefox/display-no-transition/</a></dd>
+			<dt>Expected behavior</dt>
+			<dd>When clicking the <code>display</code> button the output should update.</dd>
+			<dt>Actual Behavior</dt>
+			<dd>Nothing Happens because no <code>transitionstart</code> gets fired.</dd>
+			<dt>Noteworthy</dt>
+			<dd>N/A</dd>
+			<dt>Bug Report</dt>
+			<dd>TODO</dd>
+		</dl>
+
+		<h3>Custom Properties with discretely animatable syntaxes / Unregistered Custom Properties don’t trigger <code>transitionstart</code> upon the first change</h3>
+		<dl>
+			<dt>Demo</dt>
+			<dd><a href="firefox/string-first-no-transition/">firefox/string-first-no-transition/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are registered with <code>@property</code>. The former as a <code>&lt;number&gt;</code> and the latter as a <code>&lt;custom-ident&gt;</code></dd>
+			<dt>Expected behavior</dt>
+			<dd>Clicking the <code>--variable2</code> button updates the output</dd>
+			<dt>Actual Behavior</dt>
+			<dd>The first click does nothing. All successive clicks do trigger the transition.</dd>
+			<dt>Noteworthy</dt>
+			<dd>This applies to both Unregistered Custom Properties a Registered Custom Properties that have a syntax that can only be animated discretely.</dd>
+			<dt>Bug Report</dt>
+			<dd>TODO</dd>
+		</dl>
+
+		<h3>Registered Custom Properties rarely trigger a <code>transitionstart</code></h3>
+		<dl>
+			<dt>Demo</dt>
+			<dd><a href="firefox/registered-no-transition/">firefox/registered-no-transition/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are registered with <code>@property</code>. The former as a <code>&lt;number&gt;</code> and the latter as a <code>&lt;custom-ident&gt;</code></dd>
+			<dt>Expected behavior</dt>
+			<dd>Clicking the <code>--variable1</code> button updates the output</dd>
+			<dt>Actual Behavior</dt>
+			<dd>It doesn’t, or only rarely does, when rage clicking the button</dd>
+			<dt>Noteworthy</dt>
+			<dd>Triggering the <code>--variable2</code> button <em>(after a first miss, see previous bug)</em> does always update trigger a <code>transitionstart</code>. Is this bug only related to syntaxes that can be interpolated?</dd>
+			<dt>Bug Report</dt>
+			<dd>TODO</dd>
+		</dl>
+	
+		<h2><a href="#safari" name="safari">#</a> Safari Bugs</h2>
+		<p>Tested in Safari Technology Preview 202</p>
+		<h3>Transitioning Unregistered Custom Properties cause a transition loop</h3>
+		<dl>
+			<dt>Demo</dt>
+			<dd><a href="safari/unregistered-loop/">safari/unregistered-loop/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are not registered.</dd>
+			<dt>Expected behavior</dt>
+			<dd>When clicking the <code>--variable1</code> or <code>--variable2</code> buttons, the output should change and the transition should have triggered only once.</dd>
+			<dt>Actual Behavior</dt>
+			<dd>While the output does change, the transition is repeatedly triggered. You can verify this by checking the console, which logs <code>_handleUpdate</code> on <code>transitionstart</code></dd>
+			<dt>Noteworthy</dt>
+			<dd></dd>
+			<dt>Bug Report</dt>
+			<dd>TODO</dd>
+		</dl>
+
+		<h3>Transitioning Registered Custom Properties with discretely animatable syntaxes cause a transition loop</h3>
+		<dl>
+			<dt>Demo</dt>
+			<dd><a href="safari/registered-discrete-loop/">safari/registered-discrete-loop/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are registered with <code>@property</code>. The former as a <code>&lt;number&gt;</code> and the latter as a <code>&lt;custom-ident&gt;</code></dd>
+			<dt>Expected behavior</dt>
+			<dd>When clicking the <code>--variable2</code> button, the output should change and the transition should have triggered only once.</dd>
+			<dt>Actual Behavior</dt>
+			<dd>While the output does change, the transition is repeatedly triggered. You can verify this by checking the console, which logs <code>_handleUpdate</code> on <code>transitionstart</code>. This does not happen when clicking the <code>--variable1</code> button.</dd>
+			<dt>Noteworthy</dt>
+			<dd>When changing <code>--variable2</code> to a syntax of <code>&lt;string&gt;</code> it also doesn’t work, which leads me to believe that this behavior shows for all syntaxes that cannot be interpolated.</dd>
+			<dt>Bug Report</dt>
+			<dd>TODO</dd>
+		</dl>
+	</main>
+	<footer>
+		Built by <a href="https://www.bram.us/">Bramus</a> – Source available <a href="https://github.com/bramus/allow-discrete-bugs">on GitHub</a>
+	</footer>
+</body>
+</html>
