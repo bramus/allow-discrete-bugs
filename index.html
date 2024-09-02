@@ -84,21 +84,21 @@
 			<dd><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1916200">https://bugzilla.mozilla.org/show_bug.cgi?id=1916200</a></dd>
 		</dl>
 
-		<h3>Custom Properties with discretely animatable syntaxes / Unregistered Custom Properties don’t trigger <code>transitionstart</code> upon the first change</h3>
+		<h3>When first setting the value of a unregistered custom property, no <code>transitionstart</code> is triggered</h3>
 		<dl>
 			<dt>Demo</dt>
-			<dd><a href="firefox/string-first-no-transition/">firefox/string-first-no-transition/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are registered with <code>@property</code>. The former as a <code>&lt;number&gt;</code> and the latter as a <code>&lt;custom-ident&gt;</code></dd>
+			<dd><a href="firefox/unregistered-no-transition/">firefox/unregistered-no-transition/</a> – the custom properties <code>--variable1</code> is registered with <code>@property</code> as a <code>&lt;number&gt;</code></dd>
 			<dt>Expected behavior</dt>
 			<dd>Clicking the <code>--variable2</code> button updates the output</dd>
 			<dt>Actual Behavior</dt>
 			<dd>The first click does nothing. All successive clicks do trigger the transition.</dd>
 			<dt>Noteworthy</dt>
-			<dd>This applies to both Unregistered Custom Properties a Registered Custom Properties that have a syntax that can only be animated discretely.</dd>
+			<dd>Not sure if it is specced what should happen here. As an author, I’d like to get notified though.</dd>
 			<dt>Bug Report</dt>
 			<dd><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1916202">https://bugzilla.mozilla.org/show_bug.cgi?id=1916202</a></dd>
 		</dl>
 
-		<h3>Registered Custom Properties rarely trigger a <code>transitionstart</code></h3>
+		<h3>Registered Custom Properties with syntaxes that can be interpolated rarely trigger a <code>transitionstart</code></h3>
 		<dl>
 			<dt>Demo</dt>
 			<dd><a href="firefox/registered-no-transition/">firefox/registered-no-transition/</a> – the custom properties <code>--variable1</code> and <code>--variable2</code> are registered with <code>@property</code>. The former as a <code>&lt;number&gt;</code> and the latter as a <code>&lt;custom-ident&gt;</code></dd>
@@ -107,7 +107,7 @@
 			<dt>Actual Behavior</dt>
 			<dd>It doesn’t, or only rarely does, when rage clicking the button</dd>
 			<dt>Noteworthy</dt>
-			<dd>Triggering the <code>--variable2</code> button <em>(after a first miss, see previous bug)</em> does always update trigger a <code>transitionstart</code>. Is this bug only related to syntaxes that can be interpolated?</dd>
+			<dd>Triggering the <code>--variable2</code> button does always update trigger a <code>transitionstart</code> which leads me to believe the bug is limited to syntaxes that can be interpolated.</dd>
 			<dt>Bug Report</dt>
 			<dd><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1916203">https://bugzilla.mozilla.org/show_bug.cgi?id=1916203</a></dd>
 		</dl>
