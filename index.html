@@ -51,7 +51,7 @@
 
 		<p>All demos use <a href="https://github.com/bramus/style-observer"><code>@bramus/style-observer</code></a> which set up a <code>transitionstart</code> listener on a bunch of properties that are being tracked. See <a href="https://brm.us/style-observer">https://brm.us/style-observer</a> for details on how this library works.</p>
 		<p>In all of the demos it is expected that clicking any button updates the output shown underneath the button row.</p>
-		
+
 		<h2><a href="#chrome" name="chrome">#</a> Chrome Bugs</h2>
 		<p>Tested in Chrome 130.0.6692.0 (Official Build) canary (arm64) </p>
 		<h3>Unregistered Custom Properties don’t trigger a <code>transitionstart</code></h3>
@@ -67,7 +67,7 @@
 			<dt>Bug Report</dt>
 			<dd><a href="https://crbug.com/360159391">https://crbug.com/360159391</a></dd>
 		</dl>
-	
+
 		<h2><a href="#firefox" name="firefox">#</a> Firefox Bugs</h2>
 		<p>Tested in Firefox Nightly 131.0a1 (2024-09-01) (aarch64)</p>
 		<h3>Transitioning <code>display</code> does not trigger a <code>transitionstart</code></h3>
@@ -111,7 +111,7 @@
 			<dt>Bug Report</dt>
 			<dd><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1916203">https://bugzilla.mozilla.org/show_bug.cgi?id=1916203</a></dd>
 		</dl>
-	
+
 		<h2><a href="#safari" name="safari">#</a> Safari Bugs</h2>
 		<p>Tested in Safari Technology Preview 202</p>
 		<h3>Transitioning Unregistered Custom Properties cause a transition loop</h3>
@@ -141,6 +141,9 @@
 			<dt>Bug Report</dt>
 			<dd><a href="https://bugs.webkit.org/show_bug.cgi?id=279013">https://bugs.webkit.org/show_bug.cgi?id=279013</a></dd>
 		</dl>
+
+		<h2>Noteworthy: Custom Properties registered with a <code>&lt;custom-ident&gt;</code> syntax</h2>
+		<p>The only Custom Property syntax that seems to work well across the board is <code>custom-ident</code> (see <a href="reference/">reference</a> demo). You could use this if you want to respond to string-like values but note that these cannot start with a number (read: you can’t use this syntax to directly store numbers).</p>
 	</main>
 	<footer>
 		Built by <a href="https://www.bram.us/">Bramus</a> – Source available <a href="https://github.com/bramus/allow-discrete-bugs">on GitHub</a>
